@@ -48,7 +48,7 @@ class WeatherView: UIView {
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(red: 0, green: 0.588, blue: 1, alpha: 0.8)
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "WeatherCell")
+        cv.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: "WeatherCell")
         return cv
     }()
     

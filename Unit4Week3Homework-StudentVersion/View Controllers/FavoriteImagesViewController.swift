@@ -33,6 +33,6 @@ extension FavoriteImagesViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150.0
+        return UIScreen.main.bounds.height * 0.33
     }
 }
