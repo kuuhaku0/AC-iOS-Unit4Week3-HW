@@ -30,16 +30,15 @@ class WeatherDetailView: UIView {
         setupLocationImageView()
         setupCurrentWeatherStatusLabel()
         setupDetailLabelsStackView()
-
     }
     
     //All UI Elements
     
     lazy var forecastForLocationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.033, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.03, weight: .regular)
         label.textAlignment = .center
-        label.text = "Weather Forecast"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -47,15 +46,13 @@ class WeatherDetailView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
-        imageView.image = #imageLiteral(resourceName: "sunny")
         return imageView
     }()
     
     lazy var currentWeatherStatusLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.033, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.024, weight: .regular)
         label.textAlignment = .center
-        label.text = "Current Condition"
         return label
     }()
     
@@ -63,7 +60,6 @@ class WeatherDetailView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
         label.textAlignment = .left
-        label.text = "High:"
         return label
     }()
     
@@ -71,7 +67,6 @@ class WeatherDetailView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
         label.textAlignment = .left
-        label.text = "Low:"
         return label
     }()
     
@@ -79,7 +74,6 @@ class WeatherDetailView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
         label.textAlignment = .left
-        label.text = "Sunrise:"
         return label
     }()
     
@@ -87,7 +81,6 @@ class WeatherDetailView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
         label.textAlignment = .left
-        label.text = "Sunset:"
         return label
     }()
     
@@ -95,7 +88,6 @@ class WeatherDetailView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
         label.textAlignment = .left
-        label.text = "Wind Speed:"
         return label
     }()
     
@@ -103,7 +95,6 @@ class WeatherDetailView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
         label.textAlignment = .left
-        label.text = "Precipitation:"
         return label
     }()
     
@@ -124,7 +115,7 @@ class WeatherDetailView: UIView {
     
     //Setup constraints for UI elements
     
-    func setupForecastForLocationLabel() {
+    private func setupForecastForLocationLabel() {
         addSubview(forecastForLocationLabel)
         forecastForLocationLabel.translatesAutoresizingMaskIntoConstraints = false
         [forecastForLocationLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: WeatherView().screenHeight / 44),
@@ -133,7 +124,7 @@ class WeatherDetailView: UIView {
             .forEach{$0.isActive = true}
     }
     
-    func setupLocationImageView() {
+    private func setupLocationImageView() {
         addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         [locationImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -143,7 +134,7 @@ class WeatherDetailView: UIView {
             .forEach{$0.isActive = true}
     }
     
-    func setupCurrentWeatherStatusLabel() {
+    private func setupCurrentWeatherStatusLabel() {
         addSubview(currentWeatherStatusLabel)
         currentWeatherStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         [currentWeatherStatusLabel.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: WeatherView().screenHeight / 44),
@@ -152,13 +143,36 @@ class WeatherDetailView: UIView {
             .forEach{$0.isActive = true}
     }
     
-    func setupDetailLabelsStackView() {
+    private func setupDetailLabelsStackView() {
         addSubview(detailLabelsStackView)
         detailLabelsStackView.translatesAutoresizingMaskIntoConstraints = false
         [detailLabelsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
          detailLabelsStackView.topAnchor.constraint(equalTo: currentWeatherStatusLabel.bottomAnchor, constant: WeatherView().screenHeight / 44),
-         detailLabelsStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.36)]
+         detailLabelsStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.5)]
             .forEach{$0.isActive = true}
     }
     
+    public func configureDetailView(weatherInfo: Periods) {
+        let formattedDate = DateFormatHelper.formatter.formateDate(from: weatherInfo.validTime,
+                                                                   inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                   outputDateFormat: "MMM d, yyyy")
+        
+        let formattedSunsetTime = DateFormatHelper.formatter.formateDate(from: weatherInfo.sunsetISO,
+                                                                         inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                         outputDateFormat: "MMM d, h:mm a")
+        
+        let formattedSunriseTime = DateFormatHelper.formatter.formateDate(from: weatherInfo.sunriseISO,
+                                                                         inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                         outputDateFormat: "MMM d, h:mm a")
+        
+        forecastForLocationLabel.text = "Your forecast for \(formattedDate)"
+        currentWeatherStatusLabel.text = weatherInfo.weather
+        highLabel.text = "High: \(weatherInfo.maxTempF) F"
+        lowLabel.text = "Low: \(weatherInfo.minTempF) F"
+        sunriseLabel.text = "Sunrise: \(formattedSunriseTime)"
+        sunsetLabel.text = "Sunset: \(formattedSunsetTime)"
+        windSpeedLabel.text = "Wind Speed: \(weatherInfo.windSpeedMPH) MPH"
+        precipitationLabel.text = "Precipitation: \(weatherInfo.precipIN) Inches"
+        locationImageView.image = #imageLiteral(resourceName: "sunnyn")
+    }
 }

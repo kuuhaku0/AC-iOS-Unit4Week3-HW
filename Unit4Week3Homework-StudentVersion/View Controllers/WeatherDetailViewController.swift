@@ -12,16 +12,31 @@ class WeatherDetailViewController: UIViewController {
 
     let weatherDetailView = WeatherDetailView()
     
+    private var weatherForDate: Periods!
+    
+    init(weather: Periods) {
+        super.init(nibName: nil, bundle: nil)
+        self.weatherForDate = weather
+        weatherDetailView.configureDetailView(weatherInfo: weather)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        fatalError("init(coder:) is not supported)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
-        view.addSubview(WeatherDetailView())
+        view.addSubview(weatherDetailView)
         configureNavBar()
     }
+    
     private func configureNavBar() {
         navigationItem.title = "Forecast"
-        
-        //Setup UIBarButtonItem
         let saveImageToFavoritesBarItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveImageToFavorites))
         navigationItem.rightBarButtonItem = saveImageToFavoritesBarItem
     }

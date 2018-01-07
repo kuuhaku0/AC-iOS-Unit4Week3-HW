@@ -37,8 +37,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
-        label.text = "Date"
+        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.024, weight: .regular)
         return label
     }()
     
@@ -46,7 +45,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
-        label.text = "High"
         return label
     }()
     
@@ -54,15 +52,12 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.022, weight: .regular)
-        label.text = "Low"
         return label
     }()
     
     lazy var weatherConditionIV: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .red
-        imageView.image = #imageLiteral(resourceName: "sunny")
         return imageView
     }()
     
@@ -106,4 +101,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             .forEach{$0.isActive = true}
     }
     
+    public func configureCell(aerisWeather data: Periods) {
+        commonInit()
+    }
 }

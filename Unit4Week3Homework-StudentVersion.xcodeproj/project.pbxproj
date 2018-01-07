@@ -18,6 +18,8 @@
 		8131529D2000B60500BEDDEF /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8131529C2000B60500BEDDEF /* WeatherCollectionViewCell.swift */; };
 		813152A0200150BD00BEDDEF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8131529F200150BD00BEDDEF /* ImageCache.swift */; };
 		813152A2200150DC00BEDDEF /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A1200150DC00BEDDEF /* NetworkHelper.swift */; };
+		813152A42001613800BEDDEF /* AerisWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A32001613800BEDDEF /* AerisWeather.swift */; };
+		813152A620019D8E00BEDDEF /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A520019D8E00BEDDEF /* DateFormat.swift */; };
 		8169CCBA2000686C0025AD3B /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCB92000686C0025AD3B /* WeatherDetailViewController.swift */; };
 		8169CCBC200068820025AD3B /* FavoriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBB200068820025AD3B /* FavoriteImagesViewController.swift */; };
 		8169CCBF200069470025AD3B /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBE200069470025AD3B /* WeatherView.swift */; };
@@ -38,6 +40,8 @@
 		8131529C2000B60500BEDDEF /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		8131529F200150BD00BEDDEF /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		813152A1200150DC00BEDDEF /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		813152A32001613800BEDDEF /* AerisWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerisWeather.swift; sourceTree = "<group>"; };
+		813152A520019D8E00BEDDEF /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		8169CCB92000686C0025AD3B /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		8169CCBB200068820025AD3B /* FavoriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesViewController.swift; sourceTree = "<group>"; };
 		8169CCBE200069470025AD3B /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
@@ -88,9 +92,11 @@
 		8131529E200150AA00BEDDEF /*  Models */ = {
 			isa = PBXGroup;
 			children = (
+				813152A32001613800BEDDEF /* AerisWeather.swift */,
 				5410A6D21FFFDF6500935A9A /* ZipCodeHelper.swift */,
 				8131529F200150BD00BEDDEF /* ImageCache.swift */,
 				813152A1200150DC00BEDDEF /* NetworkHelper.swift */,
+				813152A520019D8E00BEDDEF /* DateFormat.swift */,
 			);
 			path = " Models";
 			sourceTree = "<group>";
@@ -190,12 +196,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				813152A2200150DC00BEDDEF /* NetworkHelper.swift in Sources */,
+				813152A42001613800BEDDEF /* AerisWeather.swift in Sources */,
 				8131529720008F3E00BEDDEF /* WeatherDetailView.swift in Sources */,
 				813152992000A0D800BEDDEF /* FavoriteImagesView.swift in Sources */,
 				5410A6D31FFFDF6500935A9A /* ZipCodeHelper.swift in Sources */,
 				8131529D2000B60500BEDDEF /* WeatherCollectionViewCell.swift in Sources */,
 				5410A6C31FFFDF1200935A9A /* WeatherViewController.swift in Sources */,
 				8169CCBA2000686C0025AD3B /* WeatherDetailViewController.swift in Sources */,
+				813152A620019D8E00BEDDEF /* DateFormat.swift in Sources */,
 				813152A0200150BD00BEDDEF /* ImageCache.swift in Sources */,
 				8169CCBF200069470025AD3B /* WeatherView.swift in Sources */,
 				8169CCC220006C180025AD3B /* TabBarViewController.swift in Sources */,

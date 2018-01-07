@@ -39,7 +39,7 @@ class WeatherView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: screenHeight * 0.033, weight: .regular)
-        label.text = "WEATHER"
+        label.text = "Weather"
         return label
     }()
     
@@ -91,5 +91,4 @@ class WeatherView: UIView {
          zipCodeTextField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.40)]
             .forEach{$0.isActive = true}
     }
-
 }
