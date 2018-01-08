@@ -10,19 +10,27 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    public var pixabay = [Hits]()
     let weatherView = WeatherView()
-    var cityNameFromZipCode: String! {
+    public var cityNameFromZipCode: String! {
         didSet {
-            weatherView.weatherForCityLabel.text = "7 Day Forecast for \(cityNameFromZipCode ?? "")"
+            if let cityName = cityNameFromZipCode {
+                weatherView.weatherForCityLabel.text = "7 Day Forecast for \(cityName)"
+                getPixabayInfo(from: cityName)
+            }
+            else {
+                weatherView.weatherForCityLabel.text = "Unavailable"
+            }
         }
     }
+    
     var aerisWeather = [Periods]() {
         didSet {
             weatherView.weatherCollectionView.reloadData()
         }
     }
     
-    let cellSpacing: CGFloat = 5
+    private let cellSpacing: CGFloat = 5
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +42,28 @@ class WeatherViewController: UIViewController {
         checkSavedZipcode()
     }
     
+    //TO MAYBE DO: -SWITCH ON TEXTFIELD TEXT SO ENABLE SEARCH WITH ZIPCODE AND CITY NAME
     private func checkSavedZipcode() {
         if let zipCode = UserDefaults.standard.object(forKey: "Saved Zip Code") {
             weatherView.zipCodeTextField.text = zipCode as? String
-            AerisWeatherAPIClient.manager.getWeather(from: zipCode as! String,
-                                                     completionHandler: {self.aerisWeather = $0},
-                                                     errorHandler: {print($0)})
-            ZipCodeHelper.manager.getLocationName(from: zipCode as! String,
-                                                  completionHandler: {self.cityNameFromZipCode = $0},
-                                                  errorHandler: {print($0)})
+            makeNetworkRequest(from: zipCode as! String)
         }
+    }
+    
+    private func makeNetworkRequest(from str: String) { //PASS
+        AerisWeatherAPIClient.manager.getWeather(from: str,
+                                                 completionHandler: {self.aerisWeather = $0},
+                                                 errorHandler: {print($0)})
+        ZipCodeHelper.manager.getLocationName(from: str,
+                                              completionHandler: {self.cityNameFromZipCode = $0},
+                                              errorHandler: {print($0)})
+    }
+    
+    private func getPixabayInfo(from cityName: String) { //PASS
+        let formattedCityName = cityName.replacingOccurrences(of: " ", with: "+")
+        PixabayAPIClient.manager.getPixabayData(from: formattedCityName,
+                                                completionHandler: {self.pixabay = $0},
+                                                errorHandler: {print($0)})
     }
 }
 
@@ -57,15 +77,11 @@ extension WeatherViewController: UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
             return false
         }
+
         if let zipCode = textField.text {
             aerisWeather = []
             cityNameFromZipCode = ""
-            AerisWeatherAPIClient.manager.getWeather(from: zipCode,
-                                                     completionHandler: {self.aerisWeather = $0},
-                                                     errorHandler: {print($0)})
-            ZipCodeHelper.manager.getLocationName(from: zipCode,
-                                                  completionHandler: {self.cityNameFromZipCode = $0},
-                                                  errorHandler: {print($0)})
+            makeNetworkRequest(from: zipCode)
             UserDefaults.standard.set(zipCode, forKey: "Saved Zip Code")
             textField.resignFirstResponder()
             textField.text = ""
@@ -83,6 +99,8 @@ extension WeatherViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherCollectionViewCell
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
         let weatherForDate = aerisWeather[indexPath.row]
         let formattedDate = DateFormatHelper.formatter.formateDate(from: weatherForDate.validTime,
                                                                    inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
@@ -96,7 +114,8 @@ extension WeatherViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let weatherInfo = aerisWeather[indexPath.row]
-        let detailVC = WeatherDetailViewController(weather: weatherInfo)
+        let randomPixabay = pixabay[Int(arc4random_uniform(UInt32(pixabay.count)))]
+        let detailVC = WeatherDetailViewController(weather: weatherInfo, pixabayImage: randomPixabay)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -108,11 +127,11 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
         
         let screenWidth = UIScreen.main.bounds.width
         
-        return CGSize(width: (screenWidth - (cellSpacing * numSpaces)) / numCells, height: collectionView.bounds.height - 16)
+        return CGSize(width: (screenWidth - (cellSpacing * numSpaces)) / numCells, height: collectionView.bounds.height - 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        return UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

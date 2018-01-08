@@ -23,7 +23,7 @@ class WeatherView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background"))
         setupViews()
     }
     
@@ -38,7 +38,9 @@ class WeatherView: UIView {
     lazy var weatherForCityLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: screenHeight * 0.033, weight: .regular)
+        label.textColor = .white
+        label.font = UIFont(name: "RobotoCondensed-Regular", size: screenHeight * 0.041)
+//            UIFont(ofSize: screenHeight * 0.036, weight: .heavy)
         label.text = "Weather"
         return label
     }()
@@ -47,17 +49,18 @@ class WeatherView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(red: 0, green: 0.588, blue: 1, alpha: 0.8)
+        cv.backgroundColor = .clear
         cv.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: "WeatherCell")
         return cv
     }()
     
     lazy var zipCodeTextField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "Enter a Zip Code"
+        textField.borderStyle = UITextBorderStyle.roundedRect
+        textField.placeholder = "Enter Zip Code"
         textField.textAlignment = .center
         textField.font = UIFont.systemFont(ofSize: screenHeight * 0.024, weight: .regular)
+        textField.backgroundColor = UIColor(white: 1, alpha: 0.8)
         return textField
     }()
     

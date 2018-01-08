@@ -8,8 +8,8 @@
 
 import UIKit
 
-class WeatherDetailView: UIView {
-    
+class WeatherDetailView: UIView { //All UI Elements & init for custom view
+
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -20,32 +20,18 @@ class WeatherDetailView: UIView {
         commonInit()
     }
     
-    private func commonInit() {
-        backgroundColor = .white
-        setupViews()
-    }
-    
-    private func setupViews() {
-        setupForecastForLocationLabel()
-        setupLocationImageView()
-        setupCurrentWeatherStatusLabel()
-        setupDetailLabelsStackView()
-    }
-    
-    //All UI Elements
-    
     lazy var forecastForLocationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.03, weight: .regular)
+        label.font = UIFont(name: "RobotoCondensed-Regular", size: UIScreen.main.bounds.height * 0.041)
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.textColor = .white
         return label
     }()
     
     lazy var locationImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .black
         return imageView
     }()
     
@@ -111,9 +97,67 @@ class WeatherDetailView: UIView {
         stackView.spacing = 4
         return stackView
     }()
+}
+
+extension WeatherDetailView {
     
+    private func commonInit() {
+        backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background"))
+        setupViews()
+    }
+    
+    private func setupViews() {
+        setupBlurEffectView()
+        setupForecastForLocationLabel()
+        setupLocationImageView()
+        setupCurrentWeatherStatusLabel()
+        setupDetailLabelsStackView()
+    }
+    
+    public func getPixabayImages(from pixabay: Hits?, aerisWeather: Periods) {
+        if let imgUrl = pixabay?.webformatURL {
+            ImageAPIClient.manager.loadImage(from: imgUrl,
+                                         completionHandler: {self.locationImageView.image = $0},
+                                         errorHandler: {print($0)})
+        } else {
+            locationImageView.image = UIImage(named: aerisWeather.icon)
+        }
+    }
+
+    public func configureDetailView(weatherInfo: Periods, image: Hits) {
+        let formattedDate = DateFormatHelper.formatter.formateDate(from: weatherInfo.validTime,
+                                                                   inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                   outputDateFormat: "MMM d, yyyy")
+        
+        let formattedSunsetTime = DateFormatHelper.formatter.formateDate(from: weatherInfo.sunsetISO,
+                                                                         inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                         outputDateFormat: "MMM d, h:mm a").components(separatedBy: ",").last!
+        
+        let formattedSunriseTime = DateFormatHelper.formatter.formateDate(from: weatherInfo.sunriseISO,
+                                                                          inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
+                                                                          outputDateFormat: "MMM d, h:mm a").components(separatedBy: ",").last!
+    
+        forecastForLocationLabel.text = "Your forecast for \(formattedDate)"
+        currentWeatherStatusLabel.text = weatherInfo.weather
+        highLabel.text = "High: \(weatherInfo.maxTempF) F"
+        lowLabel.text = "Low: \(weatherInfo.minTempF) F"
+        sunriseLabel.text = "Sunrise: \(formattedSunriseTime)"
+        sunsetLabel.text = "Sunset: \(formattedSunsetTime)"
+        windSpeedLabel.text = "Wind Speed: \(weatherInfo.windSpeedMPH) MPH"
+        precipitationLabel.text = "Precipitation: \(weatherInfo.precipIN) Inches"
+        getPixabayImages(from: image, aerisWeather: weatherInfo)
+    }
+}
     
     //Setup constraints for UI elements
+extension WeatherDetailView {
+    
+    private func setupBlurEffectView() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular) // .light, .dark, .prominent, .regular, .extraLight
+        let visualEffect = UIVisualEffectView(frame: UIScreen.main.bounds)
+        visualEffect.effect = blurEffect
+        addSubview(visualEffect)
+    }
     
     private func setupForecastForLocationLabel() {
         addSubview(forecastForLocationLabel)
@@ -151,28 +195,5 @@ class WeatherDetailView: UIView {
          detailLabelsStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.5)]
             .forEach{$0.isActive = true}
     }
-    
-    public func configureDetailView(weatherInfo: Periods) {
-        let formattedDate = DateFormatHelper.formatter.formateDate(from: weatherInfo.validTime,
-                                                                   inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
-                                                                   outputDateFormat: "MMM d, yyyy")
-        
-        let formattedSunsetTime = DateFormatHelper.formatter.formateDate(from: weatherInfo.sunsetISO,
-                                                                         inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
-                                                                         outputDateFormat: "MMM d, h:mm a")
-        
-        let formattedSunriseTime = DateFormatHelper.formatter.formateDate(from: weatherInfo.sunriseISO,
-                                                                         inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
-                                                                         outputDateFormat: "MMM d, h:mm a")
-        
-        forecastForLocationLabel.text = "Your forecast for \(formattedDate)"
-        currentWeatherStatusLabel.text = weatherInfo.weather
-        highLabel.text = "High: \(weatherInfo.maxTempF) F"
-        lowLabel.text = "Low: \(weatherInfo.minTempF) F"
-        sunriseLabel.text = "Sunrise: \(formattedSunriseTime)"
-        sunsetLabel.text = "Sunset: \(formattedSunsetTime)"
-        windSpeedLabel.text = "Wind Speed: \(weatherInfo.windSpeedMPH) MPH"
-        precipitationLabel.text = "Precipitation: \(weatherInfo.precipIN) Inches"
-        locationImageView.image = #imageLiteral(resourceName: "sunnyn")
-    }
 }
+

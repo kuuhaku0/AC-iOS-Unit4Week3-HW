@@ -32,7 +32,6 @@ class FavoriteImagesView: UIView {
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(FavoriteImagesTableViewCell.self, forCellReuseIdentifier: "FavoriteImagesCell")
-        tv.backgroundColor = .black
         return tv
     }()
     

@@ -20,6 +20,10 @@
 		813152A2200150DC00BEDDEF /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A1200150DC00BEDDEF /* NetworkHelper.swift */; };
 		813152A42001613800BEDDEF /* AerisWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A32001613800BEDDEF /* AerisWeather.swift */; };
 		813152A620019D8E00BEDDEF /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A520019D8E00BEDDEF /* DateFormat.swift */; };
+		813152A82002C5BF00BEDDEF /* Pixabay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813152A72002C5BF00BEDDEF /* Pixabay.swift */; };
+		813152AA2003040200BEDDEF /* Roboto_Condensed in Resources */ = {isa = PBXBuildFile; fileRef = 813152A92003040200BEDDEF /* Roboto_Condensed */; };
+		813152AC200304D900BEDDEF /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 813152AB200304D400BEDDEF /* RobotoCondensed-Light.ttf */; };
+		813152AE2003061300BEDDEF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 813152AD2003061100BEDDEF /* RobotoCondensed-Regular.ttf */; };
 		8169CCBA2000686C0025AD3B /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCB92000686C0025AD3B /* WeatherDetailViewController.swift */; };
 		8169CCBC200068820025AD3B /* FavoriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBB200068820025AD3B /* FavoriteImagesViewController.swift */; };
 		8169CCBF200069470025AD3B /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBE200069470025AD3B /* WeatherView.swift */; };
@@ -42,6 +46,10 @@
 		813152A1200150DC00BEDDEF /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		813152A32001613800BEDDEF /* AerisWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerisWeather.swift; sourceTree = "<group>"; };
 		813152A520019D8E00BEDDEF /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
+		813152A72002C5BF00BEDDEF /* Pixabay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixabay.swift; sourceTree = "<group>"; };
+		813152A92003040200BEDDEF /* Roboto_Condensed */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Roboto_Condensed; sourceTree = "<group>"; };
+		813152AB200304D400BEDDEF /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
+		813152AD2003061100BEDDEF /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		8169CCB92000686C0025AD3B /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		8169CCBB200068820025AD3B /* FavoriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesViewController.swift; sourceTree = "<group>"; };
 		8169CCBE200069470025AD3B /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
@@ -83,6 +91,9 @@
 				8169CCBD2000688A0025AD3B /* View Controllers */,
 				5410A6C01FFFDF1200935A9A /* AppDelegate.swift */,
 				5410A6C71FFFDF1200935A9A /* Assets.xcassets */,
+				813152AB200304D400BEDDEF /* RobotoCondensed-Light.ttf */,
+				813152AD2003061100BEDDEF /* RobotoCondensed-Regular.ttf */,
+				813152A92003040200BEDDEF /* Roboto_Condensed */,
 				5410A6C91FFFDF1200935A9A /* LaunchScreen.storyboard */,
 				5410A6CC1FFFDF1200935A9A /* Info.plist */,
 			);
@@ -92,6 +103,7 @@
 		8131529E200150AA00BEDDEF /*  Models */ = {
 			isa = PBXGroup;
 			children = (
+				813152A72002C5BF00BEDDEF /* Pixabay.swift */,
 				813152A32001613800BEDDEF /* AerisWeather.swift */,
 				5410A6D21FFFDF6500935A9A /* ZipCodeHelper.swift */,
 				8131529F200150BD00BEDDEF /* ImageCache.swift */,
@@ -185,6 +197,9 @@
 			files = (
 				5410A6CB1FFFDF1200935A9A /* LaunchScreen.storyboard in Resources */,
 				5410A6C81FFFDF1200935A9A /* Assets.xcassets in Resources */,
+				813152AC200304D900BEDDEF /* RobotoCondensed-Light.ttf in Resources */,
+				813152AE2003061300BEDDEF /* RobotoCondensed-Regular.ttf in Resources */,
+				813152AA2003040200BEDDEF /* Roboto_Condensed in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +216,7 @@
 				813152992000A0D800BEDDEF /* FavoriteImagesView.swift in Sources */,
 				5410A6D31FFFDF6500935A9A /* ZipCodeHelper.swift in Sources */,
 				8131529D2000B60500BEDDEF /* WeatherCollectionViewCell.swift in Sources */,
+				813152A82002C5BF00BEDDEF /* Pixabay.swift in Sources */,
 				5410A6C31FFFDF1200935A9A /* WeatherViewController.swift in Sources */,
 				8169CCBA2000686C0025AD3B /* WeatherDetailViewController.swift in Sources */,
 				813152A620019D8E00BEDDEF /* DateFormat.swift in Sources */,

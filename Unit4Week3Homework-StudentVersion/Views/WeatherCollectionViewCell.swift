@@ -21,7 +21,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = UIColor(white: 0.95, alpha: 0.5)
         setupViews()
     }
     
@@ -32,12 +32,16 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         setupWeatherConditionIV()
     }
     
-    //All UI elements
+    public func configureCell(aerisWeather data: Periods) {
+        commonInit()
+    }
     
+    //All UI elements
+
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.024, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: WeatherView().screenHeight * 0.026, weight: .regular)
         return label
     }()
     
@@ -60,13 +64,14 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+}
     //Setup constraints for UI elements
-    
+
+extension WeatherCollectionViewCell {
     private func setupDateLabel() {
         addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        [dateLabel.topAnchor.constraint(equalTo: topAnchor),
+        [dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
          dateLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
          dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
          dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor)]
@@ -76,10 +81,10 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     private func setupWeatherConditionIV() {
         addSubview(weatherConditionIV)
         weatherConditionIV.translatesAutoresizingMaskIntoConstraints = false
-        [weatherConditionIV.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
-         weatherConditionIV.bottomAnchor.constraint(equalTo: highLabel.topAnchor),
+        [weatherConditionIV.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+         weatherConditionIV.heightAnchor.constraint(equalTo: weatherConditionIV.widthAnchor),
          weatherConditionIV.centerXAnchor.constraint(equalTo: centerXAnchor),
-         weatherConditionIV.widthAnchor.constraint(equalTo: widthAnchor)]
+         weatherConditionIV.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)]
             .forEach{$0.isActive = true}
     }
     
@@ -95,13 +100,9 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     private func setupLowLabel() {
         addSubview(lowLabel)
         lowLabel.translatesAutoresizingMaskIntoConstraints = false
-        [lowLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+        [lowLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
          lowLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
          lowLabel.trailingAnchor.constraint(equalTo: trailingAnchor)]
             .forEach{$0.isActive = true}
-    }
-    
-    public func configureCell(aerisWeather data: Periods) {
-        commonInit()
     }
 }

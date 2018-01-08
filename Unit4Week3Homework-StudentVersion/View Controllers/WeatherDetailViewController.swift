@@ -13,11 +13,17 @@ class WeatherDetailViewController: UIViewController {
     let weatherDetailView = WeatherDetailView()
     
     private var weatherForDate: Periods!
+    private var pbImage: Hits! {
+        didSet {
+            print(pbImage)
+        }
+    }
     
-    init(weather: Periods) {
+    init(weather: Periods, pixabayImage: Hits) {
         super.init(nibName: nil, bundle: nil)
         self.weatherForDate = weather
-        weatherDetailView.configureDetailView(weatherInfo: weather)
+        self.pbImage = pixabayImage
+        weatherDetailView.configureDetailView(weatherInfo: weather, image: pixabayImage)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

@@ -18,7 +18,6 @@ class FavoriteImagesViewController: UIViewController {
         favoritesView.tableView.dataSource = self
         favoritesView.tableView.delegate = self
     }
-    
 }
 
 extension FavoriteImagesViewController: UITableViewDataSource, UITableViewDelegate {
