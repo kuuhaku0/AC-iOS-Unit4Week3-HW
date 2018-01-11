@@ -10,61 +10,58 @@ import UIKit
 
 class FavoriteImagesTableViewCell: UITableViewCell {
     
-    let parallaxOffsetSpeed: CGFloat = 30
-    let cellHeight: CGFloat = 250
-    var parallaxImageHeight: CGFloat {
-        let maxOffset = sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * FavoriteImagesView().tableView.frame.height) - cellHeight / 2
-        return maxOffset + self.cellHeight
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         favoritesImageView.clipsToBounds = true
+    }
+    
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favoritesImageView: UIImageView!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+    
+//    var imageTopConstraint: NSLayoutConstraint!
+//    var imageHeightConstraint: NSLayoutConstraint!
+    
+//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+//        super.init(style: style, reuseIdentifier: "FavoriteImagesCell")
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        commonInit()
+//    }
 
-    }
-        
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: "FavoriteImagesCell")
-    }
+//    private func commonInit() {
+//        backgroundColor = .white
+//        imageTopConstraint.
+//        imageHeightConstraint.constant =
+//        setupViews()
+//    }
+//
+//    private func setupViews() {
+//        setupFavoritesImageView()
+//    }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
+//    lazy var favoritesImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.clipsToBounds = true
+//        return imageView
+//    }()
     
-    private func commonInit() {
-        backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "sunny"))
-        setupViews()
-    }
+//    func configureCell(withPhoto photo: Favorite) {
+//        commonInit()
+//        print("Setting image")
+//    }
     
-    private func setupViews() {
-        setupFavoritesImageView()
-    }
-    
-    lazy var favoritesImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    func configureCell(withPhoto photo: Favorite) {
-        commonInit()
-        favoritesImageView.image = photo.image
-        print("Setting image")
-    }
-    
-    func parallaxOffset(newOffsetY: CGFloat, cell: UITableViewCell) -> CGFloat {
-        return (newOffsetY - cell.frame.origin.y) / parallaxImageHeight * parallaxOffsetSpeed
-    }
-    
-    private func setupFavoritesImageView() {
-        addSubview(favoritesImageView)
-        favoritesImageView.translatesAutoresizingMaskIntoConstraints = false
-        [favoritesImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-         favoritesImageView.widthAnchor.constraint(equalTo: self.widthAnchor),
-        favoritesImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-        favoritesImageView.trailingAnchor.constraint(equalTo: trailingAnchor)]
-            .forEach{$0.isActive = true}
-    }
+//    private func setupFavoritesImageView() {
+//        addSubview(favoritesImageView)
+//        favoritesImageView.addConstraint(imageTopConstraint)
+//        favoritesImageView.addConstraint(imageHeightConstraint)
+//        [favoritesImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//         favoritesImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)]
+//            .forEach{$0.isActive = true}
+//    }
 }
 

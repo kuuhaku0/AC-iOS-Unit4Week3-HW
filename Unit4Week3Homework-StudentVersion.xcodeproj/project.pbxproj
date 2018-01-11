@@ -29,6 +29,7 @@
 		8169CCBF200069470025AD3B /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBE200069470025AD3B /* WeatherView.swift */; };
 		8169CCC220006C180025AD3B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCC120006C180025AD3B /* TabBarViewController.swift */; };
 		816BB9ED2006F199008ED38A /* PhotoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BB9EC2006F199008ED38A /* PhotoDataModel.swift */; };
+		816BB9EF2007D054008ED38A /* tableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 816BB9EE2007D054008ED38A /* tableView.storyboard */; };
 		81BAABB02006B6E7006C2B7D /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BAABAF2006B6E7006C2B7D /* FileManager.swift */; };
 		81BAABB22006B88C006C2B7D /* SavedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BAABB12006B88C006C2B7D /* SavedImages.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,7 @@
 		8169CCBE200069470025AD3B /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		8169CCC120006C180025AD3B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		816BB9EC2006F199008ED38A /* PhotoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataModel.swift; sourceTree = "<group>"; };
+		816BB9EE2007D054008ED38A /* tableView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = tableView.storyboard; sourceTree = "<group>"; };
 		81BAABAF2006B6E7006C2B7D /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		81BAABB12006B88C006C2B7D /* SavedImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedImages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +143,7 @@
 				8131529C2000B60500BEDDEF /* WeatherCollectionViewCell.swift */,
 				813152982000A0D800BEDDEF /* FavoriteImagesView.swift */,
 				8131529A2000A3F300BEDDEF /* FavoriteImagesTableViewCell.swift */,
+				816BB9EE2007D054008ED38A /* tableView.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			files = (
 				5410A6CB1FFFDF1200935A9A /* LaunchScreen.storyboard in Resources */,
 				5410A6C81FFFDF1200935A9A /* Assets.xcassets in Resources */,
+				816BB9EF2007D054008ED38A /* tableView.storyboard in Resources */,
 				813152AC200304D900BEDDEF /* RobotoCondensed-Light.ttf in Resources */,
 				813152AE2003061300BEDDEF /* RobotoCondensed-Regular.ttf in Resources */,
 				813152AA2003040200BEDDEF /* Roboto_Condensed in Resources */,

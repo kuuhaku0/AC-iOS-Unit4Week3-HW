@@ -31,6 +31,8 @@ class FavoriteImagesView: UIView {
     
     lazy var tableView: UITableView = {
         let tv = UITableView()
+        tv.estimatedRowHeight = 250
+        tv.rowHeight = UITableViewAutomaticDimension
         tv.register(FavoriteImagesTableViewCell.self, forCellReuseIdentifier: "FavoriteImagesCell")
         return tv
     }()
@@ -38,11 +40,10 @@ class FavoriteImagesView: UIView {
     private func setupTableView() {
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        [tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-         tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-         tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-         tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)]
-            .forEach{ $0.isActive = true }
+        tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
 }
 
