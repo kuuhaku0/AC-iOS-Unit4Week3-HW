@@ -22,6 +22,7 @@ class ZipCodeHelper {
                     if let placemark = placemarks?.first, let name = placemark.locality {
                         completionHandler(name)
                     } else {
+                        //guard
                         errorHandler(error!)
                     }
                 }

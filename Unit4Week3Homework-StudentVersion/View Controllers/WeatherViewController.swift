@@ -11,7 +11,9 @@ import UIKit
 class WeatherViewController: UIViewController {
     
     public var pixabay = [Hits]()
+
     let weatherView = WeatherView()
+    
     public var cityNameFromZipCode: String! {
         didSet {
             if let cityName = cityNameFromZipCode {
@@ -50,7 +52,7 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private func makeNetworkRequest(from str: String) { //PASS
+    private func makeNetworkRequest(from str: String) {
         AerisWeatherAPIClient.manager.getWeather(from: str,
                                                  completionHandler: {self.aerisWeather = $0},
                                                  errorHandler: {print($0)})
@@ -59,7 +61,7 @@ class WeatherViewController: UIViewController {
                                               errorHandler: {print($0)})
     }
     
-    private func getPixabayInfo(from cityName: String) { //PASS
+    private func getPixabayInfo(from cityName: String) {
         let formattedCityName = cityName.replacingOccurrences(of: " ", with: "+")
         PixabayAPIClient.manager.getPixabayData(from: formattedCityName,
                                                 completionHandler: {self.pixabay = $0},
@@ -113,9 +115,9 @@ extension WeatherViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let randomPixabay = pixabay[Int(arc4random_uniform(UInt32(pixabay.count - 1)))]
         let weatherInfo = aerisWeather[indexPath.row]
-        let randomPixabay = pixabay[Int(arc4random_uniform(UInt32(pixabay.count)))]
-        let detailVC = WeatherDetailViewController(weather: weatherInfo, pixabayImage: randomPixabay)
+        let detailVC = WeatherDetailViewController(weather: weatherInfo, pixabayImageUrl: randomPixabay, cityName: cityNameFromZipCode)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

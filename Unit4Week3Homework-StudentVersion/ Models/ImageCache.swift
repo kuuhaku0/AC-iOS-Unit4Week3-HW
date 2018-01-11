@@ -25,7 +25,7 @@ class ImageCache {
         DispatchQueue.global().async {
             do {
                 let imageData = try Data.init(contentsOf: imageURL)
-                let image  = UIImage.init(data: imageData)
+                let image = UIImage.init(data: imageData)
                 
                 // store image in cache
                 if let image = image {

@@ -8,9 +8,11 @@
 
 import UIKit
 
-class WeatherView: UIView {
+class WeatherView: UIView, UIGestureRecognizerDelegate {
     
     public let screenHeight = UIScreen.main.bounds.height
+
+    private var originalPosition: CGRect = .zero
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -24,6 +26,13 @@ class WeatherView: UIView {
     
     private func commonInit() {
         backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background"))
+//        animator = UIViewPropertyAnimator(duration: 2.0, curve: .easeInOut)
+//        let myView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+//        originalPosition = myView.frame
+//        myView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background"))
+//        myView.center.y = self.center.y
+//        myView.center.x = self.center.x
+//        myView.transform = CGAffineTransform(rotationAngle: CGFloat.pi).scaledBy(x: 0.001, y: 0.001)
         setupViews()
     }
     
@@ -40,7 +49,7 @@ class WeatherView: UIView {
         label.textAlignment = .center
         label.textColor = .white
         label.font = UIFont(name: "RobotoCondensed-Regular", size: screenHeight * 0.041)
-//            UIFont(ofSize: screenHeight * 0.036, weight: .heavy)
+        //            UIFont(ofSize: screenHeight * 0.036, weight: .heavy)
         label.text = "Weather"
         return label
     }()
@@ -76,6 +85,21 @@ class WeatherView: UIView {
             .forEach{$0.isActive = true}
     }
     
+    lazy var gesture: UIPanGestureRecognizer = {
+        let gs = UIPanGestureRecognizer(target: self, action: #selector(collectionViewDragged))
+        gs.delegate = self
+        return gs
+    }()
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    @objc func collectionViewDragged() {
+//        var finalPositon: CGRect
+
+    }
+    
     private func setupWeatherCollectionView() {
         addSubview(weatherCollectionView)
         weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +108,7 @@ class WeatherView: UIView {
          weatherCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
          weatherCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)]
             .forEach{ $0.isActive = true }
+        weatherCollectionView.addGestureRecognizer(gesture)
     }
     
     private func setupTextField() {
@@ -94,4 +119,6 @@ class WeatherView: UIView {
          zipCodeTextField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.40)]
             .forEach{$0.isActive = true}
     }
+    
+
 }

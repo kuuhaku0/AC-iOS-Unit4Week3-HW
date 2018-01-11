@@ -13,6 +13,7 @@ struct Pixabay: Codable {
 }
 
 struct Hits: Codable {
+    let id: Int
     let webformatURL: String
 }
 
@@ -23,7 +24,7 @@ struct PixabayAPIClient {
                         completionHandler: @escaping ([Hits]) -> Void,
                         errorHandler: @escaping (Error) -> Void) {
         let apiKey = "7289995-9e56b8a2ea40563c0f18dde1f"
-        let urlStr = "https://pixabay.com/api/?key=\(apiKey)&q=\(cityName)"
+        let urlStr = "https://pixabay.com/api/?key=\(apiKey)&safesearch=true&q=\(cityName)"
         let request = URLRequest(url: URL(string: urlStr)!)
         let parsePixabay: (Data) -> Void = {(data: Data) in
             do {

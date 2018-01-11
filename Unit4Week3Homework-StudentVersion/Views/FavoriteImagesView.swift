@@ -21,7 +21,7 @@ class FavoriteImagesView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = .cyan
         setupViews()
     }
     

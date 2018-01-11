@@ -9,7 +9,7 @@
 import UIKit
 
 class WeatherDetailView: UIView { //All UI Elements & init for custom view
-
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -22,7 +22,7 @@ class WeatherDetailView: UIView { //All UI Elements & init for custom view
     
     lazy var forecastForLocationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "RobotoCondensed-Regular", size: UIScreen.main.bounds.height * 0.041)
+        label.font = UIFont(name: "RobotoCondensed-Regular", size: UIScreen.main.bounds.height * 0.038)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .white
@@ -117,14 +117,14 @@ extension WeatherDetailView {
     public func getPixabayImages(from pixabay: Hits?, aerisWeather: Periods) {
         if let imgUrl = pixabay?.webformatURL {
             ImageAPIClient.manager.loadImage(from: imgUrl,
-                                         completionHandler: {self.locationImageView.image = $0},
-                                         errorHandler: {print($0)})
+                                             completionHandler: {self.locationImageView.image = $0},
+                                             errorHandler: {print($0)})
         } else {
             locationImageView.image = UIImage(named: aerisWeather.icon)
         }
     }
-
-    public func configureDetailView(weatherInfo: Periods, image: Hits) {
+    
+    public func configureDetailView(weatherInfo: Periods, imageUrl: Hits, cityName: String) {
         let formattedDate = DateFormatHelper.formatter.formateDate(from: weatherInfo.validTime,
                                                                    inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
                                                                    outputDateFormat: "MMM d, yyyy")
@@ -137,7 +137,7 @@ extension WeatherDetailView {
                                                                           inputDateFormat: "yyyy-MM-dd'T'HH:mm:ssZ",
                                                                           outputDateFormat: "MMM d, h:mm a").components(separatedBy: ",").last!
     
-        forecastForLocationLabel.text = "Your forecast for \(formattedDate)"
+        forecastForLocationLabel.text = "Your forecast for \(formattedDate) in \(cityName)"
         currentWeatherStatusLabel.text = weatherInfo.weather
         highLabel.text = "High: \(weatherInfo.maxTempF) F"
         lowLabel.text = "Low: \(weatherInfo.minTempF) F"
@@ -145,7 +145,32 @@ extension WeatherDetailView {
         sunsetLabel.text = "Sunset: \(formattedSunsetTime)"
         windSpeedLabel.text = "Wind Speed: \(weatherInfo.windSpeedMPH) MPH"
         precipitationLabel.text = "Precipitation: \(weatherInfo.precipIN) Inches"
-        getPixabayImages(from: image, aerisWeather: weatherInfo)
+        getPixabayImages(from: imageUrl, aerisWeather: weatherInfo)
+        
+        //        if let url = URL(string: photo.webformatURL) {
+        //            if let image = ImageCache.manager.cachedImage(url: url) {
+        //                cell.favoritesImageView.image = image
+        //            }
+        //            else {
+        //                // keep track of cells that was set
+        //                cell.urlString = photo.webformatURL
+        //
+        //                ImageCache.manager.processImageInBackground(imageURL: url, completion: {(error, image) in
+        //                    if let error = error {
+        //                        print("error \(error.localizedDescription)")
+        //                    }
+        //                    else if let image = image {
+        //                        if cell.urlString == photo.webformatURL {
+        //                            DispatchQueue.main.async {
+        //                                cell.favoritesImageView.image = image
+        //                                cell.urlString = self.urlString
+        //                            }
+        //                        }
+        //                    }
+        //                })
+        //            }
+        //        }
+        //    }
     }
 }
     
@@ -162,7 +187,7 @@ extension WeatherDetailView {
     private func setupForecastForLocationLabel() {
         addSubview(forecastForLocationLabel)
         forecastForLocationLabel.translatesAutoresizingMaskIntoConstraints = false
-        [forecastForLocationLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: WeatherView().screenHeight / 44),
+        [forecastForLocationLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: WeatherView().screenHeight / 68),
          forecastForLocationLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
          forecastForLocationLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)]
             .forEach{$0.isActive = true}
@@ -172,7 +197,7 @@ extension WeatherDetailView {
         addSubview(locationImageView)
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         [locationImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-         locationImageView.topAnchor.constraint(equalTo: forecastForLocationLabel.bottomAnchor, constant: WeatherView().screenHeight / 44),
+         locationImageView.topAnchor.constraint(equalTo: forecastForLocationLabel.bottomAnchor, constant: WeatherView().screenHeight / 68),
          locationImageView.widthAnchor.constraint(equalTo: widthAnchor),
          locationImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)]
             .forEach{$0.isActive = true}
@@ -181,7 +206,7 @@ extension WeatherDetailView {
     private func setupCurrentWeatherStatusLabel() {
         addSubview(currentWeatherStatusLabel)
         currentWeatherStatusLabel.translatesAutoresizingMaskIntoConstraints = false
-        [currentWeatherStatusLabel.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: WeatherView().screenHeight / 44),
+        [currentWeatherStatusLabel.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: WeatherView().screenHeight / 68),
          currentWeatherStatusLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
          currentWeatherStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor)]
             .forEach{$0.isActive = true}

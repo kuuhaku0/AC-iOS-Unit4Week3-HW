@@ -28,6 +28,9 @@
 		8169CCBC200068820025AD3B /* FavoriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBB200068820025AD3B /* FavoriteImagesViewController.swift */; };
 		8169CCBF200069470025AD3B /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCBE200069470025AD3B /* WeatherView.swift */; };
 		8169CCC220006C180025AD3B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169CCC120006C180025AD3B /* TabBarViewController.swift */; };
+		816BB9ED2006F199008ED38A /* PhotoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BB9EC2006F199008ED38A /* PhotoDataModel.swift */; };
+		81BAABB02006B6E7006C2B7D /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BAABAF2006B6E7006C2B7D /* FileManager.swift */; };
+		81BAABB22006B88C006C2B7D /* SavedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BAABB12006B88C006C2B7D /* SavedImages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,9 @@
 		8169CCBB200068820025AD3B /* FavoriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesViewController.swift; sourceTree = "<group>"; };
 		8169CCBE200069470025AD3B /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		8169CCC120006C180025AD3B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		816BB9EC2006F199008ED38A /* PhotoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataModel.swift; sourceTree = "<group>"; };
+		81BAABAF2006B6E7006C2B7D /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		81BAABB12006B88C006C2B7D /* SavedImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedImages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +110,14 @@
 			isa = PBXGroup;
 			children = (
 				813152A72002C5BF00BEDDEF /* Pixabay.swift */,
+				81BAABB12006B88C006C2B7D /* SavedImages.swift */,
 				813152A32001613800BEDDEF /* AerisWeather.swift */,
 				5410A6D21FFFDF6500935A9A /* ZipCodeHelper.swift */,
 				8131529F200150BD00BEDDEF /* ImageCache.swift */,
 				813152A1200150DC00BEDDEF /* NetworkHelper.swift */,
 				813152A520019D8E00BEDDEF /* DateFormat.swift */,
+				81BAABAF2006B6E7006C2B7D /* FileManager.swift */,
+				816BB9EC2006F199008ED38A /* PhotoDataModel.swift */,
 			);
 			path = " Models";
 			sourceTree = "<group>";
@@ -210,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81BAABB02006B6E7006C2B7D /* FileManager.swift in Sources */,
 				813152A2200150DC00BEDDEF /* NetworkHelper.swift in Sources */,
 				813152A42001613800BEDDEF /* AerisWeather.swift in Sources */,
 				8131529720008F3E00BEDDEF /* WeatherDetailView.swift in Sources */,
@@ -217,6 +227,7 @@
 				5410A6D31FFFDF6500935A9A /* ZipCodeHelper.swift in Sources */,
 				8131529D2000B60500BEDDEF /* WeatherCollectionViewCell.swift in Sources */,
 				813152A82002C5BF00BEDDEF /* Pixabay.swift in Sources */,
+				816BB9ED2006F199008ED38A /* PhotoDataModel.swift in Sources */,
 				5410A6C31FFFDF1200935A9A /* WeatherViewController.swift in Sources */,
 				8169CCBA2000686C0025AD3B /* WeatherDetailViewController.swift in Sources */,
 				813152A620019D8E00BEDDEF /* DateFormat.swift in Sources */,
@@ -226,6 +237,7 @@
 				8169CCBC200068820025AD3B /* FavoriteImagesViewController.swift in Sources */,
 				5410A6C11FFFDF1200935A9A /* AppDelegate.swift in Sources */,
 				8131529B2000A3F300BEDDEF /* FavoriteImagesTableViewCell.swift in Sources */,
+				81BAABB22006B88C006C2B7D /* SavedImages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
