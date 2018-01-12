@@ -13,13 +13,11 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let weatherVCTab1 = WeatherViewController()
-        let favoritesImagesVCTab2 = UIStoryboard(name: "tableView", bundle: nil).instantiateViewController(withIdentifier: "tableView")
-            //FavoriteImagesViewController()
+        let favoritesImagesVCTab2 = FavoriteImagesViewController()
         let navVC = UINavigationController(rootViewController: weatherVCTab1)
         let tabBarList = [navVC, favoritesImagesVCTab2]
         navVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         favoritesImagesVCTab2.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         viewControllers = tabBarList
     }
-    
 }

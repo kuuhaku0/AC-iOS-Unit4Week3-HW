@@ -10,58 +10,51 @@ import UIKit
 
 class FavoriteImagesTableViewCell: UITableViewCell {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        favoritesImageView.clipsToBounds = true
+    var imageTopConstraint: NSLayoutConstraint!
+    var imageHeightConstraint: NSLayoutConstraint!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: "FavoriteImagesCell")
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        backgroundColor = .white
+        setupViews()
+    }
+
+    private func setupViews() {
+        setupFavoritesImageView()
+        favoritesImageView.translatesAutoresizingMaskIntoConstraints = false
+        imageTopConstraint.isActive = true
+        imageHeightConstraint.isActive = true
     }
     
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var favoritesImageView: UIImageView!
-    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+    lazy var favoritesImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .black
+        return imageView
+    }()
     
-//    var imageTopConstraint: NSLayoutConstraint!
-//    var imageHeightConstraint: NSLayoutConstraint!
+    func configureCell(withPhoto photo: Favorite) {
+        commonInit()
+        favoritesImageView.image = photo.image
+        print("Setting image")
+    }
     
-//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: "FavoriteImagesCell")
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        commonInit()
-//    }
-
-//    private func commonInit() {
-//        backgroundColor = .white
-//        imageTopConstraint.
-//        imageHeightConstraint.constant =
-//        setupViews()
-//    }
-//
-//    private func setupViews() {
-//        setupFavoritesImageView()
-//    }
-    
-//    lazy var favoritesImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.clipsToBounds = true
-//        return imageView
-//    }()
-    
-//    func configureCell(withPhoto photo: Favorite) {
-//        commonInit()
-//        print("Setting image")
-//    }
-    
-//    private func setupFavoritesImageView() {
-//        addSubview(favoritesImageView)
-//        favoritesImageView.addConstraint(imageTopConstraint)
-//        favoritesImageView.addConstraint(imageHeightConstraint)
-//        [favoritesImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-//         favoritesImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)]
-//            .forEach{$0.isActive = true}
-//    }
+    private func setupFavoritesImageView() {
+        addSubview(favoritesImageView)
+        imageTopConstraint = favoritesImageView.topAnchor.constraint(equalTo: contentView.topAnchor)
+        imageHeightConstraint = favoritesImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+        [favoritesImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+        favoritesImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)]
+            .forEach{$0.isActive = true}
+    }
 }
 

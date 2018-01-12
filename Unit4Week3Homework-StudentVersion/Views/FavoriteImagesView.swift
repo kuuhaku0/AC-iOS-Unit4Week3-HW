@@ -27,6 +27,7 @@ class FavoriteImagesView: UIView {
     
     private func setupViews() {
         setupTableView()
+//        setupSelfConstraints()
     }
     
     lazy var tableView: UITableView = {
@@ -45,5 +46,13 @@ class FavoriteImagesView: UIView {
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
+    
+//    func setupSelfConstraints() {
+//        self.translatesAutoresizingMaskIntoConstraints = false
+//        [self.topAnchor.constraint(equalTo: super.topAnchor),
+//         self.bottomAnchor.constraint(equalTo: super.bottomAnchor),
+//         self.widthAnchor.constraint(equalTo: super.widthAnchor)]
+//            .forEach{$0.isActive = true}
+//    }
 }
 
